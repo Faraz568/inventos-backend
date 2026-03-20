@@ -76,12 +76,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Email -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
         <!-- Jackson Java Time (LocalDateTime serialization) -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
