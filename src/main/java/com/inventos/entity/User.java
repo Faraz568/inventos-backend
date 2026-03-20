@@ -35,6 +35,9 @@ public class User {
     @Column(length = 20)
     private String phone;
 
+    @Column(name = "profile_pic", columnDefinition = "TEXT")
+    private String profilePic;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private Role role = Role.USER;

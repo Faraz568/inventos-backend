@@ -34,13 +34,25 @@ public class UserController {
             @AuthenticationPrincipal UserDetails principal) {
         User user = find(principal.getUsername());
         return ResponseEntity.ok(ApiResponse.ok(Map.of(
-            "id",       user.getId(),
-            "username", user.getUsername(),
-            "fullName", user.getFullName(),
-            "email",    user.getEmail(),
-            "phone",    user.getPhone() != null ? user.getPhone() : "",
-            "role",     user.getRole().name()
+            "id",         user.getId(),
+            "username",   user.getUsername(),
+            "fullName",   user.getFullName(),
+            "email",      user.getEmail(),
+            "phone",      user.getPhone() != null ? user.getPhone() : "",
+            "role",       user.getRole().name(),
+            "profilePic", user.getProfilePic() != null ? user.getProfilePic() : ""
         )));
+    }
+
+    @PutMapping("/me/profile-pic")
+    public ResponseEntity<ApiResponse<Void>> updateProfilePic(
+            @AuthenticationPrincipal UserDetails principal,
+            @RequestBody Map<String, String> body) {
+        User user = find(principal.getUsername());
+        String pic = body.get("profilePic");
+        user.setProfilePic(pic != null && !pic.isBlank() ? pic : null);
+        userRepository.save(user);
+        return ResponseEntity.ok(ApiResponse.ok("Profile picture updated", null));
     }
 
     
